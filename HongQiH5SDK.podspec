@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint HongQiEVSDK.podspec' to ensure this is a
+#  Be sure to run `pod spec lint HongQiH5SDK.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -33,11 +33,11 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
 
-   s.source       = { :git => "https://github.com/wyc255856/HongQiEVSDK.git", :tag => "#{s.version}" }
+   s.source       = { :git => "https://github.com/wyc255856/HongQiH5SDK.git", :tag => "#{s.version}" }
 
 
 
-   s.source_files  = "HongQiEVSDK", "HongQiH5SDKiOS/HongQiH5SDK/*.{h,m,c}"
+   s.source_files  = "HongQiH5SDK", "HongQiH5SDKiOS/HongQiH5SDK/*.{h,m,c}"
   s.exclude_files = "Classes/Exclude"
   s.resource = "HongQiH5SDKiOS/HongQiH5SDK/CarResource.bundle"
 
