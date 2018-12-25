@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "8.0"
 
-   s.source       = { :git => "https://github.com/wyc255856/HongQiH5SDK.git", :tag => "#{s.version}" }
+   s.source       = { :git => "https://github.com/wyc255856/HongQiH5.git", :tag => "#{s.version}" }
 
 
 
