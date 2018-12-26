@@ -49,7 +49,6 @@
 		53B6024020FF3DDF000DAC14 /* LoadFailedAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B6020F20FF3DDE000DAC14 /* LoadFailedAlertView.m */; };
 		53B6024120FF3DDF000DAC14 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B6021120FF3DDE000DAC14 /* ShareManager.m */; };
 		53B6024220FF3DDF000DAC14 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B6021520FF3DDE000DAC14 /* AppDelegate.m */; };
-		53B6024320FF3DDF000DAC14 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53B6021620FF3DDE000DAC14 /* Info.plist */; };
 		53B6024921002819000DAC14 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53B6024421002818000DAC14 /* Default-667h@2x.png */; };
 		53B6024A21002819000DAC14 /* bg_splash_2436*1125.png in Resources */ = {isa = PBXBuildFile; fileRef = 53B6024521002818000DAC14 /* bg_splash_2436*1125.png */; };
 		53B6024B21002819000DAC14 /* Default-Landscape-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53B6024621002818000DAC14 /* Default-Landscape-736h@3x.png */; };
@@ -326,7 +325,7 @@
 		4B92A7BC20F5AB89005B6EEE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = freedomTeam;
 				TargetAttributes = {
 					4B92A7C320F5AB89005B6EEE = {
@@ -361,7 +360,6 @@
 				53B6023120FF3DDF000DAC14 /* CarResource.bundle in Resources */,
 				53B6024921002819000DAC14 /* Default-667h@2x.png in Resources */,
 				53B6021B20FF3DDF000DAC14 /* Main.storyboard in Resources */,
-				53B6024320FF3DDF000DAC14 /* Info.plist in Resources */,
 				53B6024B21002819000DAC14 /* Default-Landscape-736h@3x.png in Resources */,
 				53B6021820FF3DDF000DAC14 /* Assets.xcassets in Resources */,
 				53B6024D21002819000DAC14 /*  Default@2x.png in Resources */,
