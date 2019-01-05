@@ -48,10 +48,10 @@
 #define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
 //在线车型首页web URL
-#define BaseURL   (@"http://www.haoweisys.com/HONGQIH5/")
+#define BaseURL   (@"http://www.e-guides.faw.cn/HONGQIH5/")
 
 //在线设置页面web URL
-#define SettingURL   (@"http://haoweisys.com/C217/C217_1/pages/set.html")
+#define SettingURL   (@"http://www.e-guides.faw.cn/C217/C217_1/pages/set.html")
 #define SettingURLByType(sType)   ([NSString stringWithFormat:@"%@%@/pages/setPhone.html",BaseURL,sType])
 #define VisitorSettingURLByType(sType)   ([NSString stringWithFormat:@"%@%@/pages/setting.html",BaseURL,sType])
 
@@ -80,35 +80,14 @@ typedef NS_ENUM(NSUInteger, nMode) {
 //通过车名称获取车型
 #define kFuncGetCarTypeByCarName(sName)\
 ^(){NSDictionary *dic = @{\
-@"CA64571-CJCH2MBW":@"C217_3",\
-@"CA64571-CJCH2MCW":@"C217_3",\
-@"CA64571-JCHMBW":@"C217_2",\
-@"CA64571-JCHMCW":@"C217_2",\
-@"CA6457A1-CJCH2ABW":@"C217_6",\
-@"CA6457A1-CJCH2ACW":@"C217_6",\
-@"CA6457A1-JCHABW":@"C217_5",\
-@"CA6457A1-JCHACW":@"C217_5",\
-@"CA6457A1-JCSAB":@"C217_4",\
-@"CA6457A-CJCH2ABW":@"C217_6",\
-@"CA6457A-CJCH2ACW":@"C217_6",\
-@"CA6457A-CJCH4ABW":@"C217_7",\
-@"CA6457A-CJCH4ACW":@"C217_7",\
-@"CA6457A-CJCH4ARW":@"C217_7",\
-@"CA6457A-JCHABW":@"C217_5",\
-@"CA6457A-JCHACW":@"C217_5",\
-@"CA6457A-JCSAB":@"C217_4",\
-@"CA6457A-JCSAC":@"C217_4",\
-@"CA6457-CJCH2MBW":@"C217_3",\
-@"CA6457-CJCH2MCW":@"C217_3",\
-@"CA6457-CJCH2MRW":@"C217_3",\
-@"CA6457-CJCHMBW":@"C217_2",\
-@"CA6457-CJCHMCW":@"C217_2",\
-@"CA6457-JCHMBW":@"C217_2",\
-@"CA6457-JCHMCW":@"C217_2",\
-@"CA6457-JCSMBW":@"C217_1",\
-@"CA6457-JCSMCW":@"C217_1",};\
+@"HONGQIH5_1":@"HONGQIH5_1",\
+@"HONGQIH5_2":@"HONGQIH5_2",\
+@"HONGQIH5_3":@"HONGQIH5_3",\
+@"HONGQIH5_4":@"HONGQIH5_4",\
+@"HONGQIH5_5":@"HONGQIH5_5",};\
 return dic[sName];\
 }()
+
 
 //
 typedef NS_ENUM(NSUInteger, CarType) {

@@ -44,13 +44,12 @@
     //    }else{
     //        [[JKEventHandler shareInstance].webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",SettingURLByType(sCarName),urlBackStr]]]];
     //    }
-    if([[ShareManager shareInstance] isBlankString:sCarName]){
+    
+    NSString *sVisitor = [userDefaults objectForKey:@"Visitor"];
+    if([@"YES" compare:sVisitor] == NSOrderedSame){
         [[JKEventHandler shareInstance].webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",VisitorSettingURLByType(sCarName),urlBackStr]]]];
-        
     }else{
-        NSLog(@"%@",[NSString stringWithFormat:@"%@%@",VisitorSettingURLByType(sCarName),urlBackStr]);
-        [[JKEventHandler shareInstance].webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",VisitorSettingURLByType(sCarName),urlBackStr]]]];
-        
+        [[JKEventHandler shareInstance].webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",SettingURLByType(sCarName),urlBackStr]]]];
     }
     
 }

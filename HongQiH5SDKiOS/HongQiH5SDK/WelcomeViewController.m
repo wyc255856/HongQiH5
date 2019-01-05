@@ -55,14 +55,29 @@
 //            [userDefaults setObject:@"YES" forKey:@"Visitor"];
 //            Visitor = YES;
 //        }
-        
+//
+//        if(![[ShareManager shareInstance] isBlankString:carName]){
+//            NSString *sModolName = kFuncGetCarTypeByCarName(carName);
+//            if(!sModolName){
+//                sModolName = typeManualComfortable;
+//            }
+//            [userDefaults setObject:carName  forKey:@"chooseCarModelName"];
+//        }
         if(![[ShareManager shareInstance] isBlankString:carName]){
             NSString *sModolName = kFuncGetCarTypeByCarName(carName);
             if(!sModolName){
                 sModolName = typeManualComfortable;
             }
             [userDefaults setObject:sModolName  forKey:@"chooseCarModelName"];
+            Visitor = NO;
+            [userDefaults setObject:@"NO" forKey:@"Visitor"];
+            
+        }else{
+            [userDefaults setObject:@"YES" forKey:@"Visitor"];
+            Visitor = YES;
         }
+        
+
         [userDefaults synchronize];
     }
     return self;
@@ -249,7 +264,7 @@
     NSString *sCarType = @"1"; //[NSString stringWithFormat:@"%d", [num intValue]%100000];
 
     //Get请求
-    NSString *url = [NSString stringWithFormat:@"http://www.haoweisys.com/hongqih5_admin/index.php/home/index/get_new_version/car_type/%@",sCarType];
+    NSString *url = [NSString stringWithFormat:@"http://www.e-guides.faw.cn/hongqih5_admin/index.php/home/index/get_new_version/car_type/%@",sCarType];
     
     [manager GET:url parameters:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //请求成功，解析数据
