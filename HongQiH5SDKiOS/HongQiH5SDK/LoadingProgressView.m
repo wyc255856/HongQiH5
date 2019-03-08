@@ -6,15 +6,15 @@
 //  Copyright © 2018年 freedomTeam. All rights reserved.
 //
 
-#import "LoadingProgressView.h"
-#import "UIColor+Util.h"
-#import "UIView+frameAdjust.h"
-#import "CarBundleTool.h"
-#import "UIView+CARAdd.h"
+#import "H5LoadingProgressView.h"
+#import "UIColor+H5CARUtil.h"
+#import "UIView+H5frameAdjust.h"
+#import "H5CarBundleTool.h"
+#import "UIView+H5CARAdd.h"
 
 
 
-@interface LoadingProgressView ()
+@interface H5LoadingProgressView ()
 /** 弹窗主内容view */
 @property (nonatomic,strong) UIView   *contentView;
 /** 提示 label */
@@ -34,7 +34,7 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-@implementation LoadingProgressView{
+@implementation H5LoadingProgressView{
     
 }
 

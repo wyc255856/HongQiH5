@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HongQiH5"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "A short description of HongQiH5SDK."
 
   s.description  = <<-DESC
@@ -39,6 +39,6 @@ Pod::Spec.new do |s|
 
    s.source_files  = "HongQiH5", "HongQiH5SDKiOS/HongQiH5SDK/*.{h,m,c}"
   s.exclude_files = "Classes/Exclude"
-  s.resource = "HongQiH5SDKiOS/HongQiH5SDK/CarResource.bundle"
+  s.resource = "HongQiH5SDKiOS/HongQiH5SDK/H5CarResource.bundle"
 
 end

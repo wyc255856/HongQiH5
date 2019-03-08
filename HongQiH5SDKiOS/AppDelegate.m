@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "WelcomeViewController.h"
+#import "H5WelcomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -25,7 +25,7 @@
     
     [NSThread sleepForTimeInterval:3.0];//设置启动页面时间
     
-    WelcomeViewController *vc = [[WelcomeViewController alloc] init];
+    H5WelcomeViewController *vc = [[H5WelcomeViewController alloc] init];
     self.window.rootViewController = vc;
 
     return YES;

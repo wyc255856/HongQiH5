@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "WelcomeViewController.h"
+#import "H5WelcomeViewController.h"
 
 @interface ViewController ()
 
@@ -27,7 +27,7 @@
 }
 
 - (void)buttonClicked {
-    WelcomeViewController *vc = [[WelcomeViewController alloc] initWithCarName:nil];
+    H5WelcomeViewController *vc = [[H5WelcomeViewController alloc] initWithCarName:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
