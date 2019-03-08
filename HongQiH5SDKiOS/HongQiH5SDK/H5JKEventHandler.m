@@ -18,11 +18,11 @@
 
 const NSString *EventHandler = @"JKEventHandler";
 
-@interface JKEventHandlerEmptyObject :NSObject
+@interface H5JKEventHandlerEmptyObject :NSObject
 
 @end
 
-@implementation JKEventHandlerEmptyObject
+@implementation H5JKEventHandlerEmptyObject
 
 @end
 
@@ -147,14 +147,14 @@ static H5JKEventHandler * _handler= nil;
         if (successCallBack) {
             successBlock = successCallBack;
         }else{
-            successBlock = [JKEventHandlerEmptyObject class];
+            successBlock = [H5JKEventHandlerEmptyObject class];
         }
         
         id failureBlock=nil;
         if (failureCallBack) {
             failureBlock = failureCallBack;
         }else{
-            failureBlock = [JKEventHandlerEmptyObject class];
+            failureBlock = [H5JKEventHandlerEmptyObject class];
         }
             NSArray *paramArray =@[params,successBlock,failureBlock];
             if ([self respondsToSelector:selector]) {
@@ -176,7 +176,7 @@ static H5JKEventHandler * _handler= nil;
     for (id object in objects) {
         id tempObject = object;
         if (![tempObject isKindOfClass:[NSObject class]]) {
-            if ([tempObject isSubclassOfClass:[JKEventHandlerEmptyObject class]]) {
+            if ([tempObject isSubclassOfClass:[H5JKEventHandlerEmptyObject class]]) {
                 tempObject = nil;
             }
         }
