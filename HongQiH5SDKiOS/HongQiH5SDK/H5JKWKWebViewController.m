@@ -27,6 +27,7 @@
 @property (nonatomic,copy) NSString *strFileName;  //标题
 @property (nonatomic,copy) NSString *fileTmpPath;  //tap目录
 @property (nonatomic, strong) UIButton      *backBtn;//返回按钮
+@property (nonatomic, assign) NSUInteger nTypeScreen;
 
 @end
 
@@ -48,8 +49,73 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"后退" style:UIBarButtonItemStyleDone target:self action:@selector(goback)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"前进" style:UIBarButtonItemStyleDone target:self action:@selector(gofarward)];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startFullScreen) name:UIWindowDidBecomeVisibleNotification object:nil];//进入全屏
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endFullScreen) name:UIWindowDidBecomeHiddenNotification object:nil];//退出全屏
+
+    
 }
 
+-(void)upcomingFullScreen {
+    //nTypeScreen =
+    NSLog(@"即将进入全屏");
+    
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    
+    nScreen =orientation;
+    //    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
+    //
+    //    }else {
+    //
+    //    }
+    
+}
+
+-(void)startFullScreen {
+    NSLog(@"进入全屏");
+    /*
+     UIApplication *application=[UIApplication sharedApplication];
+     [application setStatusBarOrientation: UIInterfaceOrientationLandscapeRight];
+     application.keyWindow.transform=CGAffineTransformMakeRotation(M_PI/2);
+     CGRect frame = [UIScreen mainScreen].applicationFrame;
+     application.keyWindow.bounds = CGRectMake(0, 0, frame.size.height + 20, frame.size.width);
+     */
+    
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val =UIInterfaceOrientationLandscapeRight;
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
+    
+}
+
+-(void)endFullScreen {
+    NSLog(@"退出全屏XXXX");
+    /*
+     UIApplication *application=[UIApplication sharedApplication];
+     [application setStatusBarOrientation: UIInterfaceOrientationLandscapeRight];
+     CGRect frame = [UIScreen mainScreen].applicationFrame;
+     application.keyWindow.bounds = CGRectMake(0, 0, frame.size.width, frame.size.height + 20);
+     [UIView animateWithDuration:0.25 animations:^{
+     application.keyWindow.transform=CGAffineTransformMakeRotation(M_PI * 2);
+     }];
+     */
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val =UIInterfaceOrientationUnknown;
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
+    
+}
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Woverriding-method-mismatch"
 #pragma clang diagnostic ignored "-Wmismatched-return-types"
@@ -93,6 +159,10 @@
     //通过默认的构造器来创建对象
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds
                                   configuration:config];
+    
+    [_webView setOpaque:false];
+    _webView.backgroundColor = [UIColor blackColor];
+
 
     //webview禁止滚动
     _webView.scrollView.bounces = false;
@@ -108,21 +178,21 @@
     //判断webview是/否加载本地
     //依据：1、选择在线模式 2、本地有下载的资源包
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *strCarName = [userDefaults objectForKey:@"chooseCarModelName"];
-    NSInteger nHaveLocal =[[userDefaults objectForKey: @"haveLocalPackaged"] integerValue];
-    NSString *sUpLoad =[userDefaults objectForKey: @"haveLocalPackaged"] ;
-    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewLoadMode"] integerValue];
+    NSString *strCarName = [userDefaults objectForKey:@"chooseH5CarModelName"];
+    NSInteger nHaveLocal =[[userDefaults objectForKey: @"haveLocalH5Packaged"] integerValue];
+    NSString *sUpLoad =[userDefaults objectForKey: @"haveLocalH5Packaged"] ;
+    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewH5LoadMode"] integerValue];
     if(!sUpLoad){
         sUpLoad = @"0";
     }
     
-    if([userDefaults objectForKey:@"webviewLoadMode"]){
+    if([userDefaults objectForKey:@"webviewH5LoadMode"]){
         if(nWebViewLoadMode){
             //upload 是新增首页链接参数  拼接进去 为js显示提示更新（红点）啥的
             [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",_url,sUpLoad]]]];
             NSLog(@"%@",[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",_url,sUpLoad]]);
         }else{
-            NSString *strLocalCarName = [userDefaults objectForKey:@"localCarModelName"];
+            NSString *strLocalCarName = [userDefaults objectForKey:@"localH5CarModelName"];
             NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/index.html",strLocalCarName]];
             [_webView loadFileURL:temDirURL allowingReadAccessToURL:temDirURL];
         }
@@ -192,7 +262,7 @@
  */
 - (void)downLoadZip{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *strCarName = [userDefaults objectForKey:@"chooseCarModelName"];
+    NSString *strCarName = [userDefaults objectForKey:@"chooseH5CarModelName"];
     
     // NSHomeDirectory()：应用程序目录， @"tmp/temp"：在tmp文件夹下创建temp 文件夹
     //_fileTmpPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"tmp/%@",strCarName]];
@@ -461,6 +531,12 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler {
         
         
     }];//删除所有的回调事件
+    
+    //删除监听者
+    [_webView removeObserver:self forKeyPath:@"loading"];
+    [_webView removeObserver:self forKeyPath:@"title"];
+    [_webView removeObserver:self forKeyPath:@"estimatedProgress"];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -506,19 +582,19 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler {
         //判断webview是/否加载本地
         //依据：1、选择在线模式 2、本地有下载的资源包
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *strCarName = [userDefaults objectForKey:@"chooseCarModelName"];
-        NSInteger nHaveLocal =[[userDefaults objectForKey: @"haveLocalPackaged"] integerValue];
-        NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewLoadMode"] integerValue];
-        if([userDefaults objectForKey:@"webviewLoadMode"]){
+        NSString *strCarName = [userDefaults objectForKey:@"chooseH5CarModelName"];
+        NSInteger nHaveLocal =[[userDefaults objectForKey: @"haveLocalH5Packaged"] integerValue];
+        NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewH5LoadMode"] integerValue];
+        if([userDefaults objectForKey:@"webviewH5LoadMode"]){
             if(nWebViewLoadMode){
-                [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",_url,[userDefaults objectForKey:@"upLoad"]]]]];
+                [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",_url,[userDefaults objectForKey:@"upH5Load"]]]]];
             }else{
-                NSString *strLocalCarName = [userDefaults objectForKey:@"localCarModelName"];
+                NSString *strLocalCarName = [userDefaults objectForKey:@"localH5CarModelName"];
                 NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/index.html",strLocalCarName]];
                 [_webView loadFileURL:temDirURL allowingReadAccessToURL:temDirURL];
             }
         }else{
-            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",[H5ShareManager shareInstance].wkWebVC.url,[userDefaults objectForKey:@"upLoad"]]]]];
+            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",[H5ShareManager shareInstance].wkWebVC.url,[userDefaults objectForKey:@"upH5Load"]]]]];
         }
         
     }else {
@@ -544,7 +620,7 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler {
 - (void)startDownload {
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *strCarName = [userDefaults objectForKey:@"chooseCarModelName"];
+    NSString *strCarName = [userDefaults objectForKey:@"chooseH5CarModelName"];
     
     NSString *path = [NSString stringWithFormat:@"%@%@%@",BaseURL,strCarName,@".zip"];
     NSString *escapedPath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -597,14 +673,14 @@ completionHandler:(void (^)(NSString * __nullable result))completionHandler {
     [operation setCompletionBlockWithSuccess:^(H5CAR_AFHTTPRequestOperation *operation, id responseObject) {
         
         // 下载完成保存状态、现在车型名称
-        [userDefaults setObject:[NSNumber numberWithInteger: STATE_HAVE_LOAD] forKey:@"haveLocalPackaged"];
-        [userDefaults setObject:strCarName forKey:@"localCarModelName"];
+        [userDefaults setObject:[NSNumber numberWithInteger: STATE_HAVE_LOAD] forKey:@"haveLocalH5Packaged"];
+        [userDefaults setObject:strCarName forKey:@"localH5CarModelName"];
         
         //保存本地资源版本号
-        [userDefaults setObject:[userDefaults objectForKey:@"newVersion"] forKey:@"localVersion"];
+        [userDefaults setObject:[userDefaults objectForKey:@"H5newVersion"] forKey:@"H5LocalVersion"];
         
         //设置模型
-        [userDefaults setInteger:0 forKey:@"webviewLoadMode"];
+        [userDefaults setInteger:0 forKey:@"webviewH5LoadMode"];
 
         [userDefaults synchronize];
         

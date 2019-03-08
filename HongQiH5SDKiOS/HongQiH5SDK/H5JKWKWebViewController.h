@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "H5WelcomeViewController.h"
 
-@interface H5JKWKWebViewController : UIViewController
+@interface H5JKWKWebViewController : UIViewController{
+    int nScreen;
+}
+
 @property (nonatomic, weak) id bottomViewController;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, assign, getter=isValue) BOOL isGoBack;

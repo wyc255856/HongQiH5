@@ -18,7 +18,7 @@
     int _timeCount;
     BOOL Finish;
     BOOL Splash;
-    BOOL Visitor;
+    BOOL H5Visitor;
 }
 @property (nonatomic, strong) UIImageView   *bgSplashImageView;   //闪屏背景图片
 @property (nonatomic, strong) UIImageView   *bgDisclaimerImageView;   //免责声明背景图片
@@ -47,13 +47,13 @@
 //            if(!sModolName){
 //                sModolName = typeManualComfortable;
 //            }
-//            [userDefaults setObject:sModolName  forKey:@"chooseCarModelName"];
-//            Visitor = NO;
-//            [userDefaults setObject:@"NO" forKey:@"Visitor"];
+//            [userDefaults setObject:sModolName  forKey:@"chooseH5CarModelName"];
+//            H5Visitor = NO;
+//            [userDefaults setObject:@"NO" forKey:@"H5Visitor"];
 //
 //        }else{
-//            [userDefaults setObject:@"YES" forKey:@"Visitor"];
-//            Visitor = YES;
+//            [userDefaults setObject:@"YES" forKey:@"H5Visitor"];
+//            H5Visitor = YES;
 //        }
 //
 //        if(![[ShareManager shareInstance] isBlankString:carName]){
@@ -61,20 +61,20 @@
 //            if(!sModolName){
 //                sModolName = typeManualComfortable;
 //            }
-//            [userDefaults setObject:carName  forKey:@"chooseCarModelName"];
+//            [userDefaults setObject:carName  forKey:@"chooseH5CarModelName"];
 //        }
         if(![[H5ShareManager shareInstance] isBlankString:carName]){
             NSString *sModolName = kFuncGetCarTypeByCarName(carName);
             if(!sModolName){
                 sModolName = typeManualComfortable;
             }
-            [userDefaults setObject:sModolName  forKey:@"chooseCarModelName"];
-            Visitor = NO;
-            [userDefaults setObject:@"NO" forKey:@"Visitor"];
+            [userDefaults setObject:sModolName  forKey:@"chooseH5CarModelName"];
+            H5Visitor = NO;
+            [userDefaults setObject:@"NO" forKey:@"H5Visitor"];
             
         }else{
-            [userDefaults setObject:@"YES" forKey:@"Visitor"];
-            Visitor = YES;
+            [userDefaults setObject:@"YES" forKey:@"H5Visitor"];
+            H5Visitor = YES;
         }
         
 
@@ -207,13 +207,13 @@
     Finish = YES;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     // 是否选择车型
-    //NSInteger chooseCarModelIndex = [[userDefaults objectForKey: @"chooseCarModelIndex"] integerValue];
-    NSString *strCarName = [userDefaults objectForKey:@"chooseCarModelName"];
+    //NSInteger chooseCarModelIndex = [[userDefaults objectForKey: @"chooseH5CarModelIndex"] integerValue];
+    NSString *strCarName = [userDefaults objectForKey:@"chooseH5CarModelName"];
     // 下载本地资源包 版本号字段 （默认本地资源版本号为1.0.0）
-    if(![userDefaults objectForKey:@"localVersion"]){
-        [userDefaults setObject:@"1.0.0" forKey:@"localVersion"];
+    if(![userDefaults objectForKey:@"H5LocalVersion"]){
+        [userDefaults setObject:@"1.0.0" forKey:@"H5LocalVersion"];
         // 是否需要下载字段（1：需要 0:不需要 为了拼接后面的设置页面的链接 实现下载最新资源包）
-        [userDefaults setObject:@"1" forKey:@"upLoad"];
+        [userDefaults setObject:@"1" forKey:@"upH5Load"];
     }
     
     //获取服务器最新资源版本号
@@ -231,7 +231,7 @@
         [self presentViewController:vc  animated:NO completion:nil];
 
     }
-//    if(Visitor == NO){
+//    if(H5Visitor == NO){
 //        if(strCarName){
 //            //获取服务器最新资源版本号
 //            JKWKWebViewController *jkVC = [JKWKWebViewController new];
@@ -260,7 +260,7 @@
     manager.responseSerializer = [H5CAR_AFHTTPResponseSerializer serializer];
    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *num = [userDefaults objectForKey:@"chooseCarModelIndex"];
+    NSNumber *num = [userDefaults objectForKey:@"chooseH5CarModelIndex"];
     NSString *sCarType = @"1"; //[NSString stringWithFormat:@"%d", [num intValue]%100000];
 
     //Get请求
@@ -272,11 +272,11 @@
         sVersion = [[NSString alloc] initWithData:responseObject encoding:NSASCIIStringEncoding];
         
         //与服务器版本号一致 sameVersion 为0
-        if([sVersion compare:[userDefaults objectForKey:@"localVersion"]]){
-            [userDefaults setObject:@"0" forKey:@"upLoad"];
+        if([sVersion compare:[userDefaults objectForKey:@"H5LocalVersion"]]){
+            [userDefaults setObject:@"0" forKey:@"upH5Load"];
         }
         //本地保存服务端最新资源版本 如下载最新资源改变本地资源localVerson版本号
-        [userDefaults setObject:sVersion forKey:@"newVersion"];
+        [userDefaults setObject:sVersion forKey:@"H5newVersion"];
 //        NSLog(@"%@", sVersion);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //请求失败

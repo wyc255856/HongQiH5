@@ -21,31 +21,31 @@
     
     //  是/否为在线
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if(![userDefaults objectForKey:@"webviewLoadMode"] ){
-        [userDefaults setInteger:MODE_ONLINE forKey:@"webviewLoadMode"];
+    if(![userDefaults objectForKey:@"webviewH5LoadMode"] ){
+        [userDefaults setInteger:MODE_ONLINE forKey:@"webviewH5LoadMode"];
         [userDefaults synchronize];
     }
-    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewLoadMode"] integerValue];
-    NSString *sCarName = [userDefaults objectForKey:@"chooseCarModelName"];
+    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewH5LoadMode"] integerValue];
+    NSString *sCarName = [userDefaults objectForKey:@"chooseH5CarModelName"];
     
     
     //  是/否为有本地下载
-    if(![userDefaults objectForKey:@"haveLocalPackaged"] ){
-        [userDefaults setInteger:STATE_UNLOAD forKey:@"haveLocalPackaged"];
+    if(![userDefaults objectForKey:@"haveLocalH5Packaged"] ){
+        [userDefaults setInteger:STATE_UNLOAD forKey:@"haveLocalH5Packaged"];
         [userDefaults synchronize];
     }
-    NSInteger nHaveLocal = [[userDefaults objectForKey:@"haveLocalPackaged"] integerValue];
+    NSInteger nHaveLocal = [[userDefaults objectForKey:@"haveLocalH5Packaged"] integerValue];
     
     //    1.设置请求路径
-    NSString *urlBackStr=[NSString stringWithFormat:@"?model=%@&mode=%lu&haveLocalPackaged=%lu&version=v%@&upLoad=%@",sCarName,nWebViewLoadMode, nHaveLocal,[userDefaults objectForKey:@"localVersion"],[userDefaults objectForKey:@"upLoad"]];
-    //    NSString *sVisitor = [userDefaults objectForKey:@"Visitor"];
+    NSString *urlBackStr=[NSString stringWithFormat:@"?model=%@&mode=%lu&haveLocalH5Packaged=%lu&version=v%@&upLoad=%@",sCarName,nWebViewLoadMode, nHaveLocal,[userDefaults objectForKey:@"H5LocalVersion"],[userDefaults objectForKey:@"upH5Load"]];
+    //    NSString *sVisitor = [userDefaults objectForKey:@"H5Visitor"];
     //    if([@"YES" compare:sVisitor] == NSOrderedSame){
     //        [[JKEventHandler shareInstance].webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",VisitorSettingURLByType(sCarName),urlBackStr]]]];
     //    }else{
     //        [[JKEventHandler shareInstance].webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",SettingURLByType(sCarName),urlBackStr]]]];
     //    }
     
-    NSString *sVisitor = [userDefaults objectForKey:@"Visitor"];
+    NSString *sVisitor = [userDefaults objectForKey:@"H5Visitor"];
     if([@"YES" compare:sVisitor] == NSOrderedSame){
         [[H5JKEventHandler shareInstance].webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@",VisitorSettingURLByType(sCarName),urlBackStr]]]];
     }else{
@@ -61,12 +61,12 @@
 - (void)selectModel:(id)params{
     //    NSLog(@"selectModel :%@",params);
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewLoadMode"] integerValue];
+    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewH5LoadMode"] integerValue];
     // 在线模式 可以切换车型浏览
     if(nWebViewLoadMode == MODE_ONLINE){
         //    1.设置请求路径
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@/?upLoad=%@",BaseURL,params,[userDefaults objectForKey:@"upLoad"]]]]];
-        [userDefaults setObject:params forKey:@"chooseCarModelName"];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@/?upLoad=%@",BaseURL,params,[userDefaults objectForKey:@"upH5Load"]]]]];
+        [userDefaults setObject:params forKey:@"chooseH5CarModelName"];
         [userDefaults synchronize];
     }
     
@@ -84,7 +84,7 @@
     //    NSLog(@"modeCheck :%@",params);
     //[[ShareManager shareInstance].wkWebVC showAlert];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setInteger:1 forKey:@"webviewLoadMode"];
+    [userDefaults setInteger:1 forKey:@"webviewH5LoadMode"];
     [userDefaults synchronize];
     
 }
@@ -135,20 +135,20 @@
     //判断webview是/否加载本地
     //依据：1、选择在线模式 2、本地有下载的资源包
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *strCarName = [userDefaults objectForKey:@"chooseCarModelName"];
-    NSInteger nHaveLocal =[[userDefaults objectForKey: @"haveLocalPackaged"] integerValue];
-    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewLoadMode"] integerValue];
+    NSString *strCarName = [userDefaults objectForKey:@"chooseH5CarModelName"];
+    NSInteger nHaveLocal =[[userDefaults objectForKey: @"haveLocalH5Packaged"] integerValue];
+    NSInteger nWebViewLoadMode = [[userDefaults objectForKey:@"webviewH5LoadMode"] integerValue];
     
-    if([userDefaults objectForKey:@"webviewLoadMode"]){
+    if([userDefaults objectForKey:@"webviewH5LoadMode"]){
         if(nWebViewLoadMode){
-            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",[H5ShareManager shareInstance].wkWebVC.url,[userDefaults objectForKey:@"upLoad"]]]]];
+            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",[H5ShareManager shareInstance].wkWebVC.url,[userDefaults objectForKey:@"upH5Load"]]]]];
         }else{
-            NSString *strLocalCarName = [userDefaults objectForKey:@"localCarModelName"];
+            NSString *strLocalCarName = [userDefaults objectForKey:@"localH5CarModelName"];
             NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/index.html",strLocalCarName]];
             [self.webView loadFileURL:temDirURL allowingReadAccessToURL:temDirURL];
         }
     }else{
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",[H5ShareManager shareInstance].wkWebVC.url,[userDefaults objectForKey:@"upLoad"]]]]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/?upLoad=%@",[H5ShareManager shareInstance].wkWebVC.url,[userDefaults objectForKey:@"upH5Load"]]]]];
     }
 }
 
@@ -163,7 +163,7 @@
  下载资源包
  */
 - (void)upLoad:(id)params{
-    //    NSLog(@"upLoad");
+    //    NSLog(@"upH5Load");
     [[H5ShareManager shareInstance].wkWebVC downLoadZip];
 }
 

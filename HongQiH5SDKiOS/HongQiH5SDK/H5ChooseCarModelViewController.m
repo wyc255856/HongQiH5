@@ -470,9 +470,9 @@
     }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[NSNumber numberWithInteger: _chooseCarModelIndex] forKey:@"chooseCarModelIndex"];
-    [userDefaults setObject:strCarTypeName forKey:@"chooseCarModelName"];
-    [userDefaults setInteger:MODE_ONLINE forKey:@"webviewLoadMode"];
+    [userDefaults setObject:[NSNumber numberWithInteger: _chooseCarModelIndex] forKey:@"chooseH5CarModelIndex"];
+    [userDefaults setObject:strCarTypeName forKey:@"chooseH5CarModelName"];
+    [userDefaults setInteger:MODE_ONLINE forKey:@"webviewH5LoadMode"];
     
     [userDefaults synchronize];
     //[self getAppNewVersion];
@@ -544,7 +544,7 @@
     manager.responseSerializer = [H5CAR_AFHTTPResponseSerializer serializer];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *num = [userDefaults objectForKey:@"chooseCarModelIndex"];
+    NSNumber *num = [userDefaults objectForKey:@"chooseH5CarModelIndex"];
     NSString *sCarType =  [NSString stringWithFormat:@"%d", [num intValue]%100000];
     
     //Get请求
@@ -556,11 +556,11 @@
         sVersion = [[NSString alloc] initWithData:responseObject encoding:NSASCIIStringEncoding];
         
         //与服务器版本号一致 sameVersion 为0
-        if([sVersion compare:[userDefaults objectForKey:@"localVersion"]]){
-            [userDefaults setObject:@"0" forKey:@"upLoad"];
+        if([sVersion compare:[userDefaults objectForKey:@"H5LocalVersion"]]){
+            [userDefaults setObject:@"0" forKey:@"upH5Load"];
         }
         //本地保存服务端最新资源版本 如下载最新资源改变本地资源localVerson版本号
-        [userDefaults setObject:sVersion forKey:@"newVersion"];
+        [userDefaults setObject:sVersion forKey:@"H5newVersion"];
         //        NSLog(@"%@", sVersion);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //请求失败
