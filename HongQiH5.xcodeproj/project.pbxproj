@@ -54,7 +54,7 @@
 		53B6024C21002819000DAC14 /* Default-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 53B6024721002819000DAC14 /* Default-568h.png */; };
 		53B6024D21002819000DAC14 /*  Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53B6024821002819000DAC14 /*  Default@2x.png */; };
 		53B6024E210028DE000DAC14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53B601BB20FF3DDE000DAC14 /* LaunchScreen.storyboard */; };
-		53F1C292223238730093225C /* H5LoadingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F1C291223238730093225C /* H5LoadingProgressView.m */; };
+		53F1C29522326BF70093225C /* H5LoadingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F1C29422326BF70093225C /* H5LoadingProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,8 +155,8 @@
 		53B6024621002818000DAC14 /* Default-Landscape-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-736h@3x.png"; sourceTree = "<group>"; };
 		53B6024721002819000DAC14 /* Default-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h.png"; sourceTree = "<group>"; };
 		53B6024821002819000DAC14 /*  Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = " Default@2x.png"; sourceTree = "<group>"; };
-		53F1C290223238730093225C /* H5LoadingProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = H5LoadingProgressView.h; path = ../../../Desktop/HongQiH5SDK/H5LoadingProgressView.h; sourceTree = "<group>"; };
-		53F1C291223238730093225C /* H5LoadingProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = H5LoadingProgressView.m; path = ../../../Desktop/HongQiH5SDK/H5LoadingProgressView.m; sourceTree = "<group>"; };
+		53F1C29322326BF70093225C /* H5LoadingProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = H5LoadingProgressView.h; sourceTree = "<group>"; };
+		53F1C29422326BF70093225C /* H5LoadingProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = H5LoadingProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,10 +278,10 @@
 				53B6020220FF3DDE000DAC14 /* h5_aestab.c */,
 				53B6020320FF3DDE000DAC14 /* h5_sha1.h */,
 				53B6020420FF3DDE000DAC14 /* H5CarAppSDK.h */,
-				53F1C290223238730093225C /* H5LoadingProgressView.h */,
-				53F1C291223238730093225C /* H5LoadingProgressView.m */,
 				53B6020620FF3DDE000DAC14 /* h5_mztools.h */,
 				53B6020720FF3DDE000DAC14 /* UIView+H5frameAdjust.h */,
+				53F1C29322326BF70093225C /* H5LoadingProgressView.h */,
+				53F1C29422326BF70093225C /* H5LoadingProgressView.m */,
 				53B6020820FF3DDE000DAC14 /* H5CAR_AFURLSessionManager.m */,
 				53B6020920FF3DDE000DAC14 /* h5_fileenc.h */,
 				53B6020A20FF3DDE000DAC14 /* h5_ioapi.h */,
@@ -379,9 +379,9 @@
 				53B6024220FF3DDF000DAC14 /* AppDelegate.m in Sources */,
 				53B6023520FF3DDF000DAC14 /* h5_prng.c in Sources */,
 				53B6023320FF3DDF000DAC14 /* H5ChooseCarModelViewController.m in Sources */,
+				53F1C29522326BF70093225C /* H5LoadingProgressView.m in Sources */,
 				53B6023620FF3DDF000DAC14 /* H5WelcomeViewController.m in Sources */,
 				53B6022520FF3DDF000DAC14 /* h5_zip.c in Sources */,
-				53F1C292223238730093225C /* H5LoadingProgressView.m in Sources */,
 				53B6022020FF3DDF000DAC14 /* H5JKWKWebViewController.m in Sources */,
 				53B6021F20FF3DDF000DAC14 /* H5CAR_AFHTTPSessionManager.m in Sources */,
 				53B6022120FF3DDF000DAC14 /* JKEventHandler+H5Car.m in Sources */,

@@ -1,5 +1,5 @@
 //
-//  LoadingProgressView.m
+//  H5LoadingProgressView.m
 //  CarApp
 //
 //  Created by 张三 on 2018/4/20.
@@ -75,7 +75,7 @@
     UIImageView *bgImgView =  [[UIImageView alloc] initWithFrame:self.frame];
     //[bgImgView setImage:[UIImage imageNamed:@"bg_style_1"]];
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSURL *bundleURL = [bundle URLForResource:@"CarResource" withExtension:@"bundle"];
+    NSURL *bundleURL = [bundle URLForResource:@"H5CarResource" withExtension:@"bundle"];
     NSBundle *resourceBundle = [NSBundle bundleWithURL: bundleURL];
     
     NSString *resName = @"bg_style_1";
