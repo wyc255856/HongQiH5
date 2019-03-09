@@ -52,7 +52,7 @@
 
 //在线设置页面web URL
 #define SettingURL   (@"http://www.haoweisys.com/C217/C217_1/pages/set.html")
-#define SettingURLByType(sType)   ([NSString stringWithFormat:@"%@%@/pages/setPhone.html",BaseURL,sType])
+#define SettingURLByType(sType)   ([NSString stringWithFormat:@"%@%@/pages/settingPhone.html",BaseURL,sType])
 #define VisitorSettingURLByType(sType)   ([NSString stringWithFormat:@"%@%@/pages/setting.html",BaseURL,sType])
 
 // 是否下载本地资源包状态
