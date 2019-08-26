@@ -18,5 +18,5 @@
 #import "UIView+H5frameAdjust.h"
 
 
-#define BASE_URL_PREFIX   (@"http://www.haoweisys.com/C217/")
+#define BASE_URL_PREFIX   (@"http://www.e-guides.faw.cn/C217/")
 

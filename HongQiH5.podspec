@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HongQiH5"
-  s.version      = "1.0.6"
+  s.version      = "1.0.7"
   s.summary      = "A short description of HongQiH5SDK."
 
   s.description  = <<-DESC
